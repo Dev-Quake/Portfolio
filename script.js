@@ -55,27 +55,28 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Navigation scroll effect
-    const navbar = document.querySelector('.navbar');
-    let lastScroll = 0;
+        // Navigation scroll effect - FIXED VERSION
+        const navbar = document.querySelector('.navbar');
+        let lastScroll = 0;
 
-    window.addEventListener('scroll', function() {
-        const currentScroll = window.pageYOffset;
-        
-        // Show/hide navbar on scroll
-        if (currentScroll <= 0) {
-            navbar.style.transform = 'translateY(0)';
-            navbar.style.boxShadow = 'none';
-        } else if (currentScroll > lastScroll) {
-            // Scrolling down
-            navbar.style.transform = 'translateY(-100%)';
-        } else {
-            // Scrolling up
-            navbar.style.transform = 'translateY(0)';
-            navbar.style.boxShadow = '0 5px 20px rgba(255, 0, 0, 0.1)';
-        }
-        
-        lastScroll = currentScroll;
-    });
+        window.addEventListener('scroll', function() {
+            const currentScroll = window.pageYOffset;
+            
+            // Always show navbar, just add shadow when scrolled
+            navbar.style.transform = 'translateY(0)'; // Always visible
+            
+            if (currentScroll > 50) {
+                // Add shadow when scrolled down a bit
+                navbar.style.boxShadow = '0 5px 20px rgba(255, 0, 0, 0.2)';
+                navbar.style.backgroundColor = 'rgba(0, 0, 0, 0.95)';
+            } else {
+                // No shadow at the top
+                navbar.style.boxShadow = 'none';
+                navbar.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
+            }
+            
+            lastScroll = currentScroll;
+        });
 
     // Form submission handling
     const commissionForm = document.getElementById('commissionForm');
